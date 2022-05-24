@@ -5,17 +5,14 @@
     /// </summary>
     public class Logger
     {
-        private static Logger? _instance;
+        private static readonly Lazy<Logger> _lazyLogger
+            = new Lazy<Logger>(() => new Logger());
 
         public static Logger Instance
         {
             get
             {
-                if (_instance == null)
-                {
-                    _instance = new Logger();
-                }
-                return _instance;
+                return _lazyLogger.Value;
             }
         }
 
